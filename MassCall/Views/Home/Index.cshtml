@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="form-group">
+            <h1>Mirpur-10</h1><span>আমাদের মাসের হিসেব</span>
+            <br />
+            <br />
+
+            <a class="btn-success" href="@Url.Action("MonthPay","MonthPay")">Money To Pay On - @DateTime.Now.ToString("MMM") </a>
+            <br />
+            <a class="btn-warning" href="@Url.Action("MonthlyEntry","MonthlyEntry")">@DateTime.Now.ToString("MMM") -- Paying</a>
+        </div>
+        
+    </div>
+    
+
+</div>
+
+<div class="container">
+    @{ 
+        Html.RenderAction("TotalSummery");
+    }
+</div>

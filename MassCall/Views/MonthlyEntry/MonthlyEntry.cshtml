@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "MonthlyEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form id="MonthlyEntryForm">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Member</label>
+        <select class="form-control" name="Memberid" id="exampleFormControlSelect1">
+            <option value=''>--Select member--</option>
+            @foreach (var member in Model.Allmembers)
+            {
+                <option value="@member.id">@member.Name</option>
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect2">Paid</label>
+        <input value="" name="Paid" />
+    </div>
+    <div class="form-group">
+        <button type="button" id="Savebtn" class="btn btn-success">Success</button>
+        <button type="reset" class="btn btn-warning">Cancel</button>
+    </div>
+</form>
+
+<script>
+    $("#Savebtn").click(function () {
+
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("MonthlyEntry", "MonthlyEntry")',
+                data: $("#MonthlyEntryForm").serialize(),
+            })
+                .done(function (response) {
+                    alert("Save")
+
+                    window.location.href = "../Home/Index";
+
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("FAIL");
+                });
+
+    })
+</script>
+

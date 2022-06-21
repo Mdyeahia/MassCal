@@ -1,0 +1,52 @@
+﻿@model MassCall.ViewModels.SummeryViewModel
+
+<table class="table table-striped">
+    <thead style="background-color:darkseagreen">
+        <tr>
+            <td>SL</td>
+            <td>Name</td>
+
+            <td>Paid</td>
+            <td>Last Paid Date</td>
+
+            <td>@DateTime.Now.AddMonths(-1).ToString("MMM") Month Cost</td>
+
+            <td>Note</td>
+
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @if (Model.summeryViewModels != null && Model.summeryViewModels.Count > 0)
+        {
+            int i = 1;
+            foreach (var entry in Model.summeryViewModels)
+            {
+        <tr>
+            <td>@i</td>
+
+            <td>@entry.Name</td>
+            <td>@entry.Paid</td>
+            <td>@entry.lastEntry</td>
+            <td>@entry.MonthCost</td>
+            <td>@entry.Note</td>
+
+
+
+
+        </tr>
+                i++;
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="12" class="text-center alert alert-danger">
+                    No Category found!!!.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
