@@ -2,20 +2,26 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<div class="jumbotron"style="text-align: -moz-center;">
     <div class="row">
         <div class="form-group">
             <h1>Mirpur-10</h1><span>আমাদের মাসের হিসেব</span>
             <br />
             <br />
-
-            <a class="btn-success" href="@Url.Action("MonthPay","MonthPay")">Money To Pay On - @DateTime.Now.ToString("MMM") </a>
+            <button id="monthPay" class="btn btn-success mr-1" type="button">Money To Pay On - @DateTime.Now.ToString("MMMM")</button>
             <br />
-            <a class="btn-warning" href="@Url.Action("MonthlyEntry","MonthlyEntry")">@DateTime.Now.ToString("MMM") -- Paying</a>
+            <br />
+            <button id="monthEntry" class="btn btn-info" type="button">@DateTime.Now.ToString("MMMM") -- Paying</button>
+
         </div>
-        
+
     </div>
-    
+    <div class="modal fade" id="FormModel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content" id="contentArea">
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -24,3 +30,31 @@
         Html.RenderAction("TotalSummery");
     }
 </div>
+<script>
+     $("#monthPay").click(function () {
+        $.ajax({
+            type: "get",
+            url: '@Url.Action("MonthPay", "MonthPay")',
+        })
+            .done(function (response) {
+                $("#FormModel").modal("toggle");
+                $("#contentArea").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
+     });
+     $("#monthEntry").click(function () {
+        $.ajax({
+            type: "get",
+            url: '@Url.Action("MonthlyEntry", "MonthlyEntry")',
+        })
+            .done(function (response) {
+                $("#FormModel").modal("toggle");
+                $("#contentArea").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
+    });
+</script>

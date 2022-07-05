@@ -16,14 +16,14 @@ namespace MassCall.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult MonthPay()
+        public PartialViewResult MonthPay()
         {
             MonthPayViewModel model = new MonthPayViewModel();
             ApplicationDbContext context = new ApplicationDbContext();
 
             model.Allmembers = context.members.ToList();
 
-            return View(model);
+            return PartialView(model);
         }
          [HttpPost]
         public ActionResult MonthPay(MonthPay model)
