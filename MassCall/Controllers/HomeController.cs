@@ -31,7 +31,7 @@ namespace MassCall.Controllers
                 "from [dbo].[MonthlyEntries] e " +
                 "join [dbo].[MonthPays] p on p.Memberid = e.Memberid " +
                 "join [dbo].[Members] m on m.id = e.Memberid " +
-                "where e.EntryDate between  DATEADD(DAY, 1, EOMONTH(GETDATE(), -1)) AND DATEADD(DAY, 1, EOMONTH(GETDATE()))" +
+                "where e.EntryDate between  DATEADD(DAY, 1, EOMONTH(GETDATE(), -1)) AND DATEADD(DAY, 1, EOMONTH(GETDATE())) and p.Month=MONTH(GETDATE())-1" +
                 "group by m.Name, p.MonthCost").ToList();
 
             model.summeryViewModels = raw;
